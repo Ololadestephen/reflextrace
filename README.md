@@ -86,6 +86,26 @@ Open:
 http://localhost:8003
 ```
 
+## Vercel Deployment
+
+The deployed site uses Vercel serverless API routes in `api/`.
+
+Set these Vercel environment variables:
+
+```bash
+QDRANT_URL=https://YOUR-CLUSTER.cloud.qdrant.io
+QDRANT_API_KEY=YOUR_API_KEY
+QDRANT_COLLECTION=reflextrace_episodes
+```
+
+After deployment, confirm the backend is live:
+
+```text
+https://reflextrace.vercel.app/api/health
+```
+
+It should return `backend: "qdrant"` and collection stats.
+
 ## Local Qdrant Option
 
 You can also run Qdrant locally:
