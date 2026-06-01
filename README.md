@@ -2,6 +2,10 @@
 
 ReflexTrace is a Qdrant-backed memory black box for physical AI. It shows how an agent can remember prior sensor-action episodes, retrieve similar moments, compare possible futures, and accept human safety feedback without becoming a chatbot.
 
+Live demo: https://reflextrace.vercel.app/
+
+Repository: https://github.com/Ololadestephen/reflextrace
+
 The prototype runs a 2D robot simulator. Each episode stores the scene vector plus payload metadata such as action, outcome, risk, position, direction, and scenario. The current scene is vectorized, searched in Qdrant, grouped by possible action, and converted into a recommendation.
 
 ## Why It Matters
@@ -105,6 +109,12 @@ PORT=8003
 - Qdrant Cloud or the `qdrant/qdrant` Docker image.
 - No frontend package manager dependencies.
 - No external CDN assets.
+
+## Submission Notes
+
+- All project code is in this GitHub repository.
+- This README includes project description, setup instructions, and dependencies.
+- Share the repository with the organizers, including @kanungle, as required by the hackathon rules.
 
 ## Project Files
 
