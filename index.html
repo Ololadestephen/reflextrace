@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReflexTrace | Robotics Observability</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-frame">
+      <header class="appbar">
+        <div class="brand-row">
+          <strong>ReflexTrace</strong>
+        </div>
+      </header>
+
+      <main class="main-shell">
+        <section class="telemetry-panel" aria-label="Qdrant telemetry">
+          <div class="panel-title">
+            <h2>Vector Store Status</h2>
+            <span>LIVE</span>
+          </div>
+
+          <div class="qdrant-panel" aria-label="Qdrant integration status">
+            <div>
+              <span>Backend</span>
+              <strong id="qdrantBackend">Local fallback</strong>
+            </div>
+            <div>
+              <span>Collection</span>
+              <strong id="qdrantCollection">reflextrace_episodes</strong>
+            </div>
+            <div>
+              <span>Point Count</span>
+              <strong id="qdrantPoints">0</strong>
+            </div>
+            <div>
+              <span>Vector Size</span>
+              <strong>11 / Cosine</strong>
+            </div>
+          </div>
+
+          <div class="event-panel" aria-label="Qdrant event log">
+            <div class="section-title">
+              <h3>Event Log</h3>
+              <span id="lastSearchCount">0 returned</span>
+            </div>
+            <div class="event-log" id="eventLog"></div>
+          </div>
+        </section>
+
+        <section class="sim-panel" aria-label="Robot simulator">
+          <div class="sim-toolbar">
+            <div>
+              <h1>Physical AI Memory Loop</h1>
+              <p id="sceneSummary">Training a vector memory from sensor-action episodes.</p>
+            </div>
+          <div class="controls">
+              <button id="playPause" type="button">Run</button>
+              <button id="stepOnce" type="button">Step</button>
+              <button id="resetWorld" type="button">Reset</button>
+            </div>
+          </div>
+
+          <div class="route-status" aria-label="Destination status">
+            <span id="destinationStatus">Destination: estimating route</span>
+            <strong id="destinationEta">ETA: --</strong>
+          </div>
+
+          <div class="scenario-strip" aria-label="Challenge scenarios">
+            <button id="narrowCorridor" type="button">Narrow Corridor</button>
+            <button id="hiddenHazard" type="button">Hidden Hazard</button>
+            <button id="blockedGoal" type="button">Blocked Goal</button>
+            <button id="memoryPatchTest" type="button">Memory Patch Test</button>
+          </div>
+
+          <div class="sim-stage">
+            <div class="sim-badge">SIM_ACTIVE: REALTIME</div>
+            <div class="scanline"></div>
+            <canvas id="world" width="760" height="520" aria-label="2D robot world"></canvas>
+          </div>
+
+          <div class="demo-controls" aria-label="Scripted demo controls">
+            <button id="demoMode" type="button">Demo Mode</button>
+            <button id="trainMemory" type="button">Train Memory</button>
+            <button id="runHazardScenario" type="button">Run Hazard Scenario</button>
+            <button id="patchUnsafe" type="button">Patch Unsafe</button>
+            <button id="replayDecision" type="button">Replay Decision</button>
+          </div>
+        </section>
+
+        <aside class="decision-panel" aria-label="Counterfactual decision panel">
+          <div class="recommendation" id="recommendation">
+            <span>Recommended action</span>
+            <strong>Collecting memory...</strong>
+          </div>
+
+          <div class="decision-explanation" aria-label="Decision explanation">
+            <span>Decision Explanation</span>
+            <p id="decisionExplanation">Waiting for Qdrant evidence.</p>
+          </div>
+
+          <div class="unsafe-decision-panel" aria-label="Mark unsafe decision">
+            <div>
+              <span>Human Feedback</span>
+              <strong>Mark current decision unsafe</strong>
+              <p>Patch similar Qdrant memories so future recommendations avoid this behavior.</p>
+              <small id="unsafeFeedbackStatus">No unsafe feedback applied yet.</small>
+            </div>
+            <button id="markDecisionUnsafe" type="button">Mark Unsafe</button>
+          </div>
+
+          <div class="section-title tight">
+            <h3>Action Comparison</h3>
+            <span id="queryLabel">Current scene vector</span>
+          </div>
+          <div class="action-grid" id="actionGrid"></div>
+
+          <div class="memory-section">
+            <div class="section-title">
+              <h3>Nearest Memories</h3>
+              <span>Similarity</span>
+            </div>
+            <div class="memory-list" id="memoryList"></div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="bottom-dock">
+        <section class="timeline-panel">
+          <div class="section-title">
+            <h3>Safety Timeline</h3>
+            <span>Latest 48 steps</span>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </section>
+
+        <section class="architecture-panel">
+          <div class="section-title">
+            <h3>Qdrant Episode Payload</h3>
+            <span>Live memory shape</span>
+          </div>
+          <pre id="memoryShape"></pre>
+        </section>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
