@@ -110,11 +110,6 @@ PORT=8003
 - No frontend package manager dependencies.
 - No external CDN assets.
 
-## Submission Notes
-
-- All project code is in this GitHub repository.
-- This README includes project description, setup instructions, and dependencies.
-- Share the repository with the organizers, including @kanungle, as required by the hackathon rules.
 
 ## Project Files
 
